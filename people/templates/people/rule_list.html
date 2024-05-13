@@ -1,0 +1,86 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+<h1>Governing Rules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Title</th>
+      <th>Statement</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rule in rules %}
+    <tr>
+      <td>{{ rule.order }}</td>
+      <td>
+        <a href="{% url 'rule_detail' rule.id %}">{{ rule.title }}</a>
+      </td>
+      <td>{{ rule.content|truncatechars:100 }}</td> 
+      <td>
+        <a href="{% url 'edit_rule' rule.id %}">Edit</a> |
+        <a href="{% url 'delete_rule' rule.id %}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+<h1>Proposed Rules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Statement</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for proposal in proposals %}
+    <tr>
+      <td>{{ proposal.title }}</td>
+      <td>{{ proposal.status }}</td>
+      <td>{{ proposal.content|truncatechars:100 }}</td> 
+      <td>
+        <a href="{% url 'edit_proposal' proposal.id %}">Edit</a> |
+        <a href="{% url 'approve_proposal' proposal.id %}">Approve</a> |
+        <a href="{% url 'discard_proposal' proposal.id %}">Discard</a> |
+      </td>
+    </tr>
+    {% endfor %}
+    
+  </tbody>
+</table>
+
+<a href="{% url 'propose_rule' %}">Propose Rule</a> 
+
+{% if is_paginated %}
+  <div class="pagination">
+    {% if page.has_previous %}
+      <a href="?page={{ page.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for page_num in page.paginator.page_range %}
+      {% if page_num == page.number %}
+        <span class="current">{{ page_num }}</span>
+      {% else %}
+        <a href="?page={{ page_num }}">{{ page_num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page.has_next %}
+      <a href="?page={{ page.next_page_number }}">Next</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+
+{% endblock content %}

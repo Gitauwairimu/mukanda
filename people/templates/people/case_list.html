@@ -1,0 +1,33 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+    <h1>Cases</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Deceased Name</th>
+                <th>Date of Death</th>
+                <th>Contribution Window Start</th>
+                <th>Contribution Window End</th>
+                <th>Case Number</th>
+                <th>Case Status</th>
+                <th>Report</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for case in object_list %}
+                <tr>
+                    <td>{{ case.deceased_name }}</td>
+                    <td>{{ case.date_of_death }}</td>
+                    <td>{{ case.contribution_window_start }}</td>
+                    <td>{{ case.contribution_window_end }}</td>
+                    <td>{{ case.case_number }}</td>
+                    <td>{{ case.status }}</td>
+                    <td> <a href="{% url 'case_contribution_report' case.case_number %}" class="btn btn-primary">Generate</a> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock content %}
+

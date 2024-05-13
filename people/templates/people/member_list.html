@@ -1,0 +1,29 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %} 
+
+  <h1>Group Members</h1>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Membership Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Status</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member in object_list %}
+        <tr>
+          <td>{{ member.membership_number }}</td>  <td>{{ member.first_name }} </td>
+          <td>{{ member.last_name }}</td>
+          <td>{{ member.status }}</td>
+          <td><a href="{% url 'member_detail' member.pk %}">Details</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  
+  {% endblock content %}

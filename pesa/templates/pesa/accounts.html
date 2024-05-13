@@ -1,0 +1,27 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+  <h1>Accounts and Balances</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for account in accounts %}
+        <tr>
+          <td>{{ account.name }}</td>
+          <td>{{ account.balance }}</td>  </tr>
+      {% endfor %}
+
+
+    </tbody>
+  </table>
+
+  <br>
+  <a href="{% url 'accounts_transfer' %}">Make Inter-Account Transfer</a> || <a href="{% url 'cash_out_request' %}">Cash Out </a> || <a href="{% url 'cashoutlist' %}">Cash Out List</a>
+
+  {% endblock content %}

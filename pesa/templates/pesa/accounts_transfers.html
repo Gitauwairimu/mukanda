@@ -1,0 +1,28 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+<h5> Accounts Transfer Funds </h5>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="message {{ message.tags }}">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form action='' method='POST'>
+{% csrf_token %}
+
+
+{{ form.as_p}}
+
+<button type='submit'> Transfer </button>
+
+<a href="{% url 'cash_out_request' %}">Cash Out</a>
+</form>
+
+{% endblock content %}

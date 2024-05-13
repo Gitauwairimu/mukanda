@@ -1,0 +1,69 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1>Finances & Membership Dashboard</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Finances</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'accounts' %}" class="card-link">Manage Accounts</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'pay' %}" class="card-link">Register Payment</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'transactions_list' %}" class="card-link">View Transactions</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="card-link">Generate Reports</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h2>Membership</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'member_list' %}" class="card-link">Manage Members</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'register_member' %}" class="card-link">Add New Members</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'active_members' %}" class="card-link">View Active Members</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'case_create' %}" class="card-link">Add Member Case</a>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'case_list' %}" class="card-link">View Cases</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}

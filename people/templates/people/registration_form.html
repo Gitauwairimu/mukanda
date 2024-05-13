@@ -1,0 +1,169 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+   <!-- <div class="container">
+     <h1>Register Membership</h1>
+     {% if errors %}
+     <div class="error-messages">
+       <h3>There were some errors in your form:</h3>
+       <ul>
+         {% for field, error_list in errors.items %}
+           <li><b>{{ field }}:</b> {{ error_list.0 }}</li>  {% endfor %}
+       </ul>
+     </div>
+    {% endif %}
+
+
+     <form action="{% url 'register_member' %}" method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+       <div class="form-group">
+         <label for="first-name">First Name:</label>
+         <input type="text" name="first_name" id="first_name" required>
+       </div>
+       <div class="form-group">
+         <label for="last-name">Other Name:</label>
+         <input type="text" name="other_name" id="other_name">
+       </div>
+       <div class="form-group">
+         <label for="last-name">Last Name:</label>
+         <input type="text" name="last_name" id="last_name" required>
+       </div>
+       <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          </select>
+      </div>
+       <div class="form-group">
+         <label for="dependents">Dependents (number):</label>
+         <input type="number" name="dependents" id="number_of_dependents" min="0">
+       </div>
+       <div id="dependents-info" style="display: none;">  </div>
+       <div class="form-group">
+         <label for="address">Residence Address:</label>
+         <textarea name="address" id="address" rows="2" required></textarea>
+       </div>
+       <div class="form-group">
+         <label for="phone">Phone Number:</label>
+         <input type="tel" name="phone" id="phone_number">
+       </div>
+       <div class="form-group">
+         <label for="id-number">ID Number:</label>
+         <input type="text" name="id_number" id="id_number" required>
+       </div>
+
+       <div class="form-group">
+         <label for="email">Email (Optional):</label>
+         <input type="email" name="email" id="email">
+       </div>
+       <div class="form-group">
+         <label for="passport_photo">Member's Passport Photo:</label>
+         <input type="file" name="passport_photo" id="passport_photo" accept="image/*">
+       </div>
+       <button type="submit">Register</button>
+     </form>
+   </div>
+   
+   <script>
+     const dependentsInput = document.getElementById('dependents');
+     const dependentsInfo = document.getElementById('dependents-info');
+ 
+     dependentsInput.addEventListener('change', function() {
+       const numDependents = parseInt(this.value);
+       dependentsInfo.innerHTML = ''; // Clear previous information
+ 
+       if (numDependents > 0) {
+         dependentsInfo.style.display = 'block'; // Show the section
+         for (let i = 0; i < numDependents; i++) {
+           const dependentLabel = document.createElement('label');
+           dependentLabel.textContent = `Dependent ${i + 1} Information:`;
+           dependentsInfo.appendChild(dependentLabel);
+ 
+           const dependentName = document.createElement('input');
+           dependentName.type = 'text';
+           dependentName.name = `dependent_name_${i + 1}`;
+           dependentName.placeholder = 'Enter Dependent Name';
+           dependentsInfo.appendChild(dependentName);
+ 
+           const dependentAge = document.createElement('input');
+           dependentAge.type = 'number';
+           dependentAge.name = `dependent_age_${i + 1}`;
+           dependentAge.placeholder = 'Enter Dependent Age';
+           dependentsInfo.appendChild(dependentAge);
+ 
+           const dependentGenderLabel = document.createElement('label');
+           dependentGenderLabel.textContent = 'Dependent Gender:';
+           dependentsInfo.appendChild(dependentGenderLabel);
+ 
+           const dependentGender = document.createElement('select');
+           dependentGender.name = `dependent_gender_${i + 1}`;
+           dependentGender.id = `dependent_gender_${i + 1}`; // Optional for styling
+ 
+           const maleOption = document.createElement('option');
+           maleOption.value = 'male';
+           maleOption.textContent = 'Male';
+           dependentGender.appendChild(maleOption);
+ 
+           const femaleOption = document.createElement('option');
+           femaleOption.value = 'female';
+           femaleOption.textContent = 'Female';
+           dependentGender.appendChild(femaleOption);
+ 
+           // Add more options if needed (e.g., non-binary)
+           // const nonBinaryOption = document.createElement('option');
+           // nonBinaryOption.value = 'non-binary';
+           // nonBinaryOption.textContent = 'Non-Binary';
+           // dependentGender.appendChild(nonBinaryOption);
+ 
+           dependentsInfo.appendChild(dependentGender);
+         }
+       } else {
+         dependentsInfo.style.display = 'none'; // Hide the section
+       }
+     });
+   </script> 
+ 
+   <h1>Register as a Member</h1>
+   <form action="{% url 'register_member' %}" method="post" enctype="multipart/form-data" class="form-horizontal">
+     {% csrf_token %}
+   
+     <div class="row">
+       <label for="id_first_name" class="col-sm-2 control-label">First name:</label>
+       <div class="col-sm-3">
+         {{ form.first_name }}  
+       </div>
+   
+       <label for="id_other_name" class="col-sm-2 control-label">Other name:</label>
+       <div class="col-sm-3">
+         {{ form.other_name }}  
+       </div>
+   
+       <label for="id_last_name" class="col-sm-2 control-label">Last name:</label>
+       <div class="col-sm-3">
+         {{ form.first_name }}  
+       </div>
+     </div>
+   
+     <button type="submit" class="btn btn-primary">Register</button>
+   </form>
+   
+ 
+
+-->
+
+  <h1>Register as a Member</h1>
+  <form action="{% url 'register_member' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {{ form.as_p }}  
+
+    <button type="submit" class="btn btn-primary">Register</button>
+
+  </form>
+
+  
+  {% endblock content %}
+
+

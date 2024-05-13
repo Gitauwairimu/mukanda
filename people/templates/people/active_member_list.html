@@ -1,0 +1,45 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+  <h1>Active Members</h1>
+
+  <form method="GET">
+    <div class="form-group">
+      <label for="search_query">Search by Name or ID:</label>
+      <input type="text" class="form-control" id="search_query" name="search_query" placeholder="Enter search term">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  {% if active_members %}
+
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Membership Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>National ID #</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for activemember in active_members %}
+        <tr>
+          <td>{{ activemember.membership_number }}</td>  <td>{{ activemember.first_name }} </td>
+          <td>{{ activemember.last_name }}</td>
+          <td>{{ activemember.id_number }}</td>
+          <td><a href="{% url 'member_detail' activemember.pk %}">Details</a></td>
+        </tr>
+      {% endfor %}
+
+  {% else %}
+      <p class="alert alert-info">No active members found.</p>
+
+
+  {% endif %}
+    </tbody>
+  </table>
+
+  {% endblock content %}

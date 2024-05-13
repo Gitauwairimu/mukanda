@@ -1,0 +1,16 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+<h1>Confirm Discard Proposal</h1>
+
+<p>Are you sure you want to delete the proposal:<strong> {{ proposal.title }} </strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Discard Proposal</button>
+  <a href="{% url 'rules' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock content %}

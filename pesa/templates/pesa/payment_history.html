@@ -1,0 +1,42 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+<h2>Payment History</h2>
+
+<table>
+  <tr>
+    <th>Case #</th>
+    <th>Amount</th>
+    <th>Payment Date</th>
+    <th>Payment Method</th>
+    <th>Transaction ID</th>
+    <th>Paid By</th>
+    <th>Received By</th>
+  </tr>
+  {% for payment in payments %}
+  <tr>
+    <td>{{ payment.case_number }}</td>
+    <td>{{ payment.amount }}</td>
+    <td>{{ payment.payment_date }}</td>
+    <td>{{ payment.payment_method }}</td>
+    <td>{{ payment.payment_id }}</td>
+    <td>{{ payment.payer }}</td>
+    <td>{{ payment.receiver }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% if payments.first %}
+  <p>Member Information:</p>
+  <ul>
+    <li>Member ID Number: {{ payments.first.member.id_number }}</li>
+    <li>Member Name: {{ payments.first.member.first_name }} {{ payments.first.member.other_name }} {{ payments.first.member.last_name }}</li>
+  </ul>
+  {% else %}
+<p>No payments found for this member.</p>
+
+{% endif %}
+
+
+{% endblock content %}

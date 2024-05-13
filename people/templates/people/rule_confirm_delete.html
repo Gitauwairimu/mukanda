@@ -1,0 +1,17 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+<h1>Confirm Delete Rule</h1>
+
+<p>Are you sure you want to delete the rule:<strong> {{ rule.title }} </strong>?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Delete Rule</button>
+  <a href="{% url 'rules' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+
+{% endblock content %}

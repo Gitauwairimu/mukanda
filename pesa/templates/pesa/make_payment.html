@@ -1,0 +1,19 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+{% for message in messages %}
+ {{message}}
+{% endfor %}
+
+<h5> Make Payment </h5>
+<form action='' method='POST'>
+{% csrf_token %}
+
+
+{{ form.as_p}}
+
+<button type='submit'> Pay </button>
+</form>
+
+{% endblock content %}

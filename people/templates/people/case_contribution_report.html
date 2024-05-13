@@ -1,0 +1,93 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+  
+    <h1>Case Contribution Report</h1>
+    <p>Case Number: {{ report_data.case_number }}</p>
+    <h2>Deceased Member</h2>
+    <ul>
+        <li>Names: {{ report_data.deceased_details.first_name }} {{ report_data.deceased_details.other_name }} {{ report_data.deceased_details.last_name }}</li>
+        <li>Membership Number: {{ report_data.deceased_details.membership_number }}</li>
+        <li>ID Number: {{ report_data.deceased_details.id_number }}</li>
+        <li>Next_of Kin: {{ report_data.deceased_details.next_of_kin }} - Phone: {{ report_data.deceased_details.next_of_kin_contact }}</li>
+        <li>Date of Death: {{ report_data.deceased_details.date_of_death }}</li>
+        <li>Address: {{ report_data.deceased_details.address }}</li>
+    </ul>
+    <h2>Contribution Summary</h2>
+    <ul>
+        <li>Window Open Date:  {{ case.contribution_window_start }} </li>
+        <li>Window Close Date: {{ case.contribution_window_end }}  </li>
+        <h6> .................................................................................................................... </h6>
+        <li>Total Transactions: </li>
+        <li>Full Payment: {{ report_data.full_payment_count }} / {{ total_members }} </li>
+        <li>Partial Payment: {{ report_data.partial_payment_count }} / {{ total_members }} </li>
+        <li>No Payment: {{ report_data.no_payment_count }} / {{ total_members }}</li>
+    </ul>
+
+    <h2>Main Payment Accounts</h2>
+    <ul>
+        {% for account in accounts %}
+            <li> {{ account.name }} - Account Balance: KES {{ account.balance }}</li>
+        {% endfor %}
+    </ul>
+
+
+
+    <h2>Case: {{ report_data.case_number }} Sub-Account</h2>
+    <ul>
+      <li>Cash Contributions: KES {{ cash_total }}</li>
+      <li>Mpesa Contributions: KES {{ mpesa_total }}</li>
+      <li>Cheque Contributions: KES {{ cheque_total }}</li>
+      <br>
+      <strong style="text-decoration: underline; display: block; text-align: left;">Total Case Contributions: KES {{ contributions_total }}</strong>
+    </ul>
+
+    <br>
+    
+    <div class="container">
+
+
+    <div class="div1" id="cash-out-details" style="padding: 20px;";>
+      <p>Total Case Contributions: KES {{ contributions_total }}</p>
+      <p>Case confirmation Fee: KES {{ report_data.confirmation_fee }}</p>
+      <p>Case Management Deduction: KES 2,000</p>
+      <p>Mpesa Charges: KES {{ report_data.mpesa_charge }}</p>
+      <p>Net Amount To Send: KES {{ report_data.net_amount_sent }}</p>
+      <button id="cash-out-button" enabled> Transfer from Accounts (KES {{ report_data.net_amount_sent }}) to {{ report_data.deceased_details.next_of_kin_contact }} </button>
+    </div>
+
+    
+    <div class="div2" id="cash-out-details";>
+      <p> {{ case.cashed_out }}</p>
+      <p> {{ case.get_cashed_out_display }}</p>
+
+    </div>
+    
+    </div>
+
+<h2>List of Penalized Members</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Membership Number</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Penalty</th>
+    </tr>
+  </thead>
+
+    {% for penalized_member in unpaid_members %}
+      <tr>
+        <td>{{ penalized_member.membership_number }}</td>  
+        <td>{{ penalized_member.first_name }} </td>
+        <td>{{ penalized_member.last_name }}</td>
+
+        {% for penalty in penalized_member.penalties.all %}
+        <td>KES {{ penalty.amount }}</td>
+        {% endfor %}
+      
+        </tr>
+    {% endfor %}
+      </table>
+
+{% endblock content %}

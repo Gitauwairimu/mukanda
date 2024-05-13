@@ -1,0 +1,39 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+    <h1>Transactions of Member Contributions</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Case Number</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Amount</th>
+        <th>Payer</th>
+        <th>Mode</th>
+        <th>Membership #</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for payment in object_list %}
+        <tr>
+          <td>{{ payment.case_number }}</td>
+          <td>{{ payment.payment_date |date:"Y-m-d" }}</td>
+          <td>{{ payment.payment_date |time:"H:i" }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.payer }}</td>
+          <td>{{ payment.payment_method }}</td>
+          <td>{{ payment.member }} </td>
+          <td>
+            <a href="{% url 'payment_details' payment.payment_id %}">View Details</a>
+          </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+      
+  </table>
+
+  {% endblock content %}
+

@@ -1,0 +1,22 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+<h2>Create Rule Proposal</h2>
+
+<form method="post">
+  {% csrf_token %}  {{ form.as_p }}  <button type="submit">Create Rule Proposal</button>
+</form>
+
+{% if form.errors %}
+  <ul class="errors">
+    {% for error in form.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+
+{% endblock content %}

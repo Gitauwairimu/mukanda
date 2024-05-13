@@ -1,0 +1,12 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+  <h1>Add Dependent for Member: {{ member }}</h1>  
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Dependent</button>
+  </form>
+
+  {% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+  <h1>Payment Details</h1>
+
+  {% if payment %}
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Case Number</th>
+          <td>{{ payment.case_number }}</td>
+        </tr>
+        <tr>
+          <th>Payment Date</th>
+          <td>{{ payment.payment_date }}</td>
+        </tr>
+        <tr>
+          <th>Amount</th>
+          <td>KES {{ payment.amount }}</td>
+        </tr>
+        <tr>
+          <th>Paid By</th>
+          <td>{{ payment.payer }}</td>
+        </tr>
+        <tr>
+          <th>Payment Method</th>
+          <td>{{ payment.payment_method }}</td>
+        </tr>
+        <tr>
+          <th>Membership Number</th>
+          <td>{{ payment.member }}</td>
+        </tr>
+        <tr>
+          <th>Transaction ID</th>
+          <td>{{ payment.payment_id }}</td> </tr>
+        <tr>
+          <th>Status</th>
+          <td>{{ payment.status }}</td> </tr>
+      </tbody>
+    </table>
+  {% else %}
+    <p>No payment details found.</p>
+  {% endif %}
+
+  <a href="{% url 'payments_list' payment.case_number %}">Back to Payments List</a>
+
+  {% endblock content %}

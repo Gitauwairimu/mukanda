@@ -1,0 +1,114 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+
+  <h1>Member Details</h1>
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="message {{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+
+
+
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card" style="width: 100%;">
+            <img class="card-img-top rounded-circle" src="{{ member.passport_photo.url }}" alt="Card image cap">
+            <div class="card-body">
+              <h3 class="card-title">
+                <label for="first-name"></label> <span id="first-name" class="font-weight-bold">{{ member.first_name }}</span> 
+                <label for="other-name"></label> <span id="other-name">{{ member.other_name }}</span> 
+                <label for="last-name"></label> <span id="last-name">{{ member.last_name }}</span> 
+
+              </h3>
+                
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <label for="membership_number">Membership Number:</label> <span id="membership_number">{{ member.membership_number }}</span>
+                </li>
+                <li class="list-group-item">
+                  <label for="gender">Gender:</label> <span id="gender">{{ member.gender }}</span>
+                </li>
+                <li class="list-group-item">
+                  <label for="contact">Contact:</label> 
+                  <span id="phone-number">{{ member.phone_number }}</span>  
+                  {% if member.email %}
+                    <br>
+                    <span id="email">Email: {{ member.email }}</span>
+                  {% endif %}
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <a href="{% url 'edit_member_detail' member.pk %}" class="btn btn-primary">Update Member</a>
+              <a href="{% url 'member_list' %}" class="btn btn-outline-primary">Master List</a>
+              <a href="{% url 'active_members' %}" class="btn btn-outline-primary">Active Members List</a>
+
+
+
+
+              <a href="{% url 'add_dependent' member.pk  %}" class="btn btn-primary">Add Dependent</a>
+              <a href="{% url 'payments_history' member.pk  %}" class="btn btn-primary">Payment History</a>
+              <a href="{% url 'delete_member' member.pk %}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this member?');">Delete Member</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card" style="width: 100%;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <label for="next_of_kin">Next of Kin:</label> <span id="next_of_kin">{{ member.next_of_kin }}</span>
+              </li>
+              <li class="list-group-item">
+                <label for="next_of_kin_contact">Next of Kin Contact:</label> <span id="next_of_kin_contact">{{ member.next_of_kin_contact }}</span>
+              </li>
+              <li class="list-group-item">
+                <label for="is-active">Active Member:</label> <span id="is-active">{{ member.status }}</span>
+              </li>
+              <li class="list-group-item">
+                <label for="date-registered">Date Registered:</label> <span id="date-registered">{{ member.join_date }}</span>  
+              </li>
+              <li class="list-group-item">
+                <label for="date-of-birth">Date of Birth:</label> <span id="date-of-birth">{{ member.dob }}</span>  
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h2>Dependents</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width: 25%">Full Name</th>
+      <th style="width: 20%">Date of Birth</th>
+      <th style="width: 15%">Relationship</th>
+      <th style="width: 15%">Membership #</th>
+      <th style="width: 15%">Status</th>
+
+    </thead>
+  <tbody>
+    {% for dependent in dependents %}
+      <tr>
+        <td>{{ dependent.full_name }}</td>
+        <td>{{ dependent.dob|timesince:today }}</td>  <td>{{ dependent.relationship }}</td>
+        <td>{{ dependent }}</td>  <td>{{ dependent.status }}</td>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock content %}

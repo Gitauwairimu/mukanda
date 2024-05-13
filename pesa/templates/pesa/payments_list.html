@@ -1,0 +1,23 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+  <h1>Payments for Case: {{ case.case_number }}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Member</th>
+        <th>Total Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member, total_paid in case_payments.items %}
+        <tr>
+          <td>{{ member }}</td>
+          <td>KES {{ total_paid }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endblock content %}

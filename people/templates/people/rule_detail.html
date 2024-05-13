@@ -1,0 +1,17 @@
+{% extends 'people/base/base.html' %}
+
+{% block content %}
+
+<h1>Rule Details</h1>
+
+<p><b>Title:</b> {{ rule.title }}</p>
+<p><b>Statement:</b> {{ rule.content }}</p>
+{% if rule.order %}
+<p><b>Order:</b> {{ rule.order }}</p>
+{% endif %}
+
+<a href="{% url 'edit_rule' rule.id %}">Edit Rule</a>
+<a href="{% url 'delete_rule' rule.id %}">Delete Rule</a>
+<a href="{% url 'rules' %}">Back to Rules</a>
+
+{% endblock content %}

@@ -1,0 +1,67 @@
+# Dependencies
+*.pyc
+__pycache__/
+venv/
+
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.eggs/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller temporary files
+*.manifest
+*.spec
+
+# IDE and OS specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local files
+.env
+local_settings.py
+
+# Testing frameworks
+.pytest_cache/
+htmlcov/
+
+# Database files
+db.sqlite3
+db.sqlite3-journal
+
+# Static files (managed by collectstatic)
+/static/
+
+# Media files (user uploaded content)
+/media/
+
+# Django test coverage report
+.coverage
+
+# Temporary cache files
+*.log
+
+# GraphiQL IDE
+.graphqlrc
+
+# Requirements files
+requirements.txt
+requirements-dev.txt
